@@ -1,0 +1,115 @@
+ (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
+diff --git a/styles.css b/styles.css
+new file mode 100644
+index 0000000000000000000000000000000000000000..8295a6184ae7d866bee70772a2bc8397a3a06f7f
+--- /dev/null
++++ b/styles.css
+@@ -0,0 +1,105 @@
++:root {
++  --green-900: #1c3a2f;
++  --green-700: #2b5d4b;
++  --green-100: #e6f2ee;
++  --sand: #f6f3eb;
++  --text: #1f2933;
++  --white: #ffffff;
++}
++
++* { box-sizing: border-box; }
++body {
++  margin: 0;
++  font-family: Arial, sans-serif;
++  color: var(--text);
++  background: var(--sand);
++  line-height: 1.6;
++}
++
++.container {
++  width: min(1100px, 92%);
++  margin: 0 auto;
++}
++
++.hero {
++  background: linear-gradient(120deg, var(--green-900), var(--green-700));
++  color: var(--white);
++  padding: 2rem 0;
++}
++
++.hero-top { display: flex; align-items: center; }
++.brand { display: flex; align-items: center; gap: 1rem; }
++.logo {
++  width: 56px;
++  height: 56px;
++  border-radius: 50%;
++  display: grid;
++  place-items: center;
++  background: #ffcc66;
++  font-size: 1.6rem;
++}
++.brand h1 { margin: 0; font-size: clamp(1.3rem, 3vw, 2rem); }
++
++.section { padding: 3rem 0; }
++.section-alt { background: var(--green-100); }
++
++.cards {
++  display: grid;
++  gap: 1rem;
++  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
++}
++.card {
++  background: var(--white);
++  border-radius: 10px;
++  padding: 1rem;
++  box-shadow: 0 4px 18px rgb(0 0 0 / 8%);
++}
++
++.gallery {
++  display: grid;
++  gap: 1rem;
++  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
++}
++.photo {
++  margin: 0;
++  min-height: 140px;
++  border-radius: 10px;
++  background: linear-gradient(140deg, #dceee7, #bfdacb);
++  display: grid;
++  place-items: center;
++  font-weight: 700;
++}
++
++.checks li { margin-bottom: 0.6rem; }
++
++.contact-form {
++  display: grid;
++  gap: 0.8rem;
++  max-width: 550px;
++}
++input, textarea {
++  width: 100%;
++  margin-top: 0.3rem;
++  padding: 0.6rem;
++  border: 1px solid #c9d2dc;
++  border-radius: 8px;
++}
++
++.btn {
++  display: inline-block;
++  padding: 0.65rem 1rem;
++  border-radius: 8px;
++  background: #ffcc66;
++  color: #1a1a1a;
++  text-decoration: none;
++  border: none;
++  cursor: pointer;
++  font-weight: 700;
++}
++
++.footer {
++  background: #0f201a;
++  color: #cdd7d2;
++  text-align: center;
++  padding: 1rem 0;
++}
+ 
+EOF
+)
