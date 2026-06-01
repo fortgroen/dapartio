@@ -3,88 +3,120 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bijzondere zorg voor bijzondere dieren - vanaf juli 2026</title>
+  <title>Artio – Bijzondere zorg voor bijzondere dieren</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Inter', sans-serif;
-      background: linear-gradient(rgba(8, 18, 14, 0.78), rgba(8, 18, 14, 0.88)),
-        url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+      background:
+        linear-gradient(rgba(8, 18, 14, 0.82), rgba(8, 18, 14, 0.90)),
+        url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       color: #ffffff;
-      padding: 24px;
+      padding: 24px 24px 48px;
     }
 
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.13);
+      color: rgba(255,255,255,0.75);
+      padding: 9px 20px;
+      border-radius: 999px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+      backdrop-filter: blur(8px);
+    }
+
+    nav button:hover {
+      background: rgba(255,255,255,0.14);
+      color: #fff;
+    }
+
+    nav button.active {
+      background: rgba(255,255,255,0.18);
+      border-color: rgba(255,255,255,0.35);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* ── CONTAINER ── */
     .container {
       width: 100%;
       max-width: 720px;
-      background: rgba(255, 255, 255, 0.08);
+      margin: 0 auto;
+      background: rgba(255,255,255,0.08);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255,255,255,0.12);
       border-radius: 28px;
-      padding: 56px 48px;
-      text-align: center;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      padding: 52px 48px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
     }
 
+    /* ── PAGE VISIBILITY ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── HOME ── */
+    .home-inner { text-align: center; }
+
     .logo {
-      width: 190px;
-      height: 190px;
+      width: 190px; height: 190px;
       margin: 0 auto 34px;
       border-radius: 50%;
-      background: rgba(255, 255, 255, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: rgba(255,255,255,0.1);
+      display: flex; align-items: center; justify-content: center;
       overflow: hidden;
       border: 2px solid rgba(255,255,255,0.15);
     }
 
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .logo img { width: 100%; height: 100%; object-fit: cover; }
 
     h1 {
-      font-size: 2.6rem;
+      font-size: 2.4rem;
       font-weight: 700;
       margin-bottom: 12px;
       letter-spacing: -1px;
+      line-height: 1.2;
     }
 
     .subtitle {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       color: rgba(255,255,255,0.78);
-      margin-bottom: 40px;
+      margin-bottom: 36px;
       line-height: 1.7;
     }
 
     .status {
       display: inline-block;
-      padding: 12px 22px;
+      padding: 11px 22px;
       border-radius: 999px;
       background: rgba(255,255,255,0.12);
       border: 1px solid rgba(255,255,255,0.14);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 600;
       letter-spacing: 0.5px;
-      margin-bottom: 42px;
+      margin-bottom: 40px;
     }
 
+    /* ── CONTACT BOX (reused across pages) ── */
     .contact-box {
       background: rgba(255,255,255,0.07);
       border-radius: 22px;
@@ -93,115 +125,431 @@
     }
 
     .contact-title {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .contact-item {
       display: flex;
       gap: 14px;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       align-items: flex-start;
       color: rgba(255,255,255,0.9);
+      font-size: 0.96rem;
+      line-height: 1.55;
     }
 
-    .contact-item:last-child {
-      margin-bottom: 0;
+    .contact-item:last-child { margin-bottom: 0; }
+
+    .icon { font-size: 1.05rem; width: 24px; text-align: center; opacity: 0.9; flex-shrink: 0; padding-top: 2px; }
+
+    .contact-item a { color: #fff; text-decoration: none; transition: opacity 0.2s; }
+    .contact-item a:hover { opacity: 0.75; }
+
+    /* ── SECTION HEADINGS ── */
+    .page-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 32px;
     }
 
-    .icon {
-      font-size: 1.1rem;
-      width: 24px;
-      text-align: center;
-      opacity: 0.9;
+    /* ── TEAM ── */
+    .team-member {
+      margin-bottom: 36px;
     }
 
-    .contact-item a {
-      color: #ffffff;
+    .team-member:last-child { margin-bottom: 0; }
+
+    .member-name {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .member-name::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.6);
+      flex-shrink: 0;
+    }
+
+    .team-member p {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,0.82);
+      margin-bottom: 12px;
+    }
+
+    .team-member p:last-child { margin-bottom: 0; }
+
+    .member-photo {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 2px solid rgba(255,255,255,0.15);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      margin: 28px 0;
+    }
+
+    /* ── FACILITEITEN ── */
+    .page-body {
+      font-size: 0.95rem;
+      line-height: 1.78;
+      color: rgba(255,255,255,0.82);
+    }
+
+    .page-body p { margin-bottom: 16px; }
+    .page-body p:last-child { margin-bottom: 0; }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .photo-placeholder {
+      aspect-ratio: 4/3;
+      background: rgba(255,255,255,0.06);
+      border: 1px dashed rgba(255,255,255,0.18);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.8rem;
+    }
+
+    .photo-placeholder span { font-size: 1.8rem; }
+
+    /* ── STUDIES ── */
+    .timeline { list-style: none; }
+
+    .timeline-section {
+      margin-bottom: 28px;
+    }
+
+    .timeline-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .timeline-year {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.45);
+      white-space: nowrap;
+      min-width: 82px;
+      padding-top: 2px;
+    }
+
+    .timeline-text {
+      font-size: 0.93rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.84);
+    }
+
+    .linkedin-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 20px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #fff;
       text-decoration: none;
-      transition: opacity 0.2s ease;
+      font-size: 0.88rem;
+      font-weight: 500;
+      transition: background 0.2s;
     }
 
-    .contact-item a:hover {
-      opacity: 0.8;
+    .linkedin-link:hover { background: rgba(255,255,255,0.16); }
+
+    /* ── CONTACT NOTE ── */
+    .contact-note {
+      background: rgba(255,255,255,0.05);
+      border-left: 3px solid rgba(255,255,255,0.2);
+      border-radius: 0 12px 12px 0;
+      padding: 16px 20px;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.78);
+      margin-bottom: 28px;
     }
 
+    /* ── FOOTER ── */
     .footer {
       margin-top: 36px;
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.55);
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.45);
+      text-align: center;
     }
 
+    /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
-      .container {
-        padding: 42px 26px;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .subtitle {
-        font-size: 1rem;
-      }
-
-      .contact-box {
-        padding: 22px;
-      }
+      .container { padding: 36px 22px; }
+      h1 { font-size: 1.85rem; }
+      .photo-grid { grid-template-columns: 1fr; }
+      nav button { font-size: 0.82rem; padding: 8px 14px; }
     }
   </style>
 </head>
 <body>
+
+  <nav>
+    <button class="active" onclick="showPage('home')">Home</button>
+    <button onclick="showPage('team')">Het team</button>
+    <button onclick="showPage('faciliteiten')">Faciliteiten</button>
+    <button onclick="showPage('studies')">Studies & ervaring</button>
+    <button onclick="showPage('fotos')">Foto's</button>
+    <button onclick="showPage('contact')">Contact</button>
+  </nav>
+
   <div class="container">
 
-    <!-- Vervang logo.png door jouw eigen logo -->
-    <div class="logo">
-      <img src="Definitief logo.png" alt="Logo dierenarts wilde dieren">
-    </div>
-
-    <h1>Bijzondere zorg voor bijzondere dieren - vanaf juli 2026</h1>
-
-    <p class="subtitle">
-      Gespecialiseerde zorg en ondersteuning voor wilde dieren.
-      Onze website is momenteel in ontwikkeling.
-    </p>
-
-    <div class="status">
-      WEBSITE IN AANMAAK
-    </div>
-
-    <div class="contact-box">
-      <div class="contact-title">Contactgegevens</div>
-
-      <div class="contact-item">
-        <div class="icon">📍</div>
-        <div>
-         Engelmanshoven<br>
-         
+    <!-- ══ HOME ══ -->
+    <div id="home" class="page active">
+      <div class="home-inner">
+        <div class="logo">
+          <img src="Definitief logo.png" alt="Logo Artio dierenarts">
         </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="icon">📞</div>
-        <div>
-          <a href="tel:+32456882310">+32456882310</a>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="icon">✉️</div>
-        <div>
-          <a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a>
+        <h1>Bijzondere zorg voor bijzondere dieren</h1>
+        <p class="subtitle">
+          Gespecialiseerde zorg en ondersteuning voor wilde en exotische dieren.
+        </p>
+        <div class="status">VANAF JULI 2026 VAN START</div>
+        <div class="contact-box">
+          <div class="contact-title">Contactgegevens</div>
+          <div class="contact-item">
+            <div class="icon">📍</div>
+            <div>Engelmanshoven (Sint-Truiden)</div>
+          </div>
+          <div class="contact-item">
+            <div class="icon">📞</div>
+            <div><a href="tel:+32456882310">+32 456 88 23 10</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="icon">✉️</div>
+            <div><a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a></div>
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="footer">
-      © 2026 Artio Niels Schouteden · Alle rechten voorbehouden
+    <!-- ══ HET TEAM ══ -->
+    <div id="team" class="page">
+      <div class="page-title">Het team</div>
+
+      <div class="team-member">
+        <div class="member-name">Niels</div>
+        <img src="Niels.jfif" alt="Niels" class="member-photo"> Al een half jaar nadat Niels afstudeerde, dook hij in de dierentuinwereld. Allereerst vanuit een gemengde praktijk, waardoor hij ervaring kon opdoen, van nachtelijke keizersnedes bij rundvee tot het typische eerstelijnswerk bij honden, katten en paarden. Maar al snel groeide de passie voor het werk in Monde Sauvage Safari Parc, Pakawi Park (vroeger Olmense zoo) maar ook de bijzondere dieren bij particulieren, van kleine reptielen, over roofvogels tot alpaca's.</p>
+        <p>Even nog combineerde hij het werk in Monde Sauvage met meer gespecialiseerd werk in dierenkliniek Sanimalia, maar sinds 2017 werkt hij 4 dagen per week als hoofddierenarts in Monde Sauvage. Daarnaast behaalde hij een bijkomende master in biologie, gericht op conservatie en globale problemen, en specialiseerde hij zich verder in bijkomende opleidingen en vormingen.</p>
+        <p>Nu hij een prachtige vierkantshoeve in Sint-Truiden heeft verbouwd als uitvalsbasis, is het tijd om terug als zelfstandige in bijberoep wat bij te springen in de zorg van bijzondere dieren — een veld waar jammer genoeg weinig mensen grondig in geschoold zijn. Hoewel hij niet vies is van gedomesticeerde dieren, wil hij zich toespitsen op exotische dieren en zogenaamde 'nieuwe' gezelschapsdieren: van alpaca's over vogels tot reptielen. Ook voor ontsnapte of gevaarlijke dieren kan hij gecontacteerd worden, al kan aan spoedgevallen zelden beantwoord worden gezien zijn vaste tewerkstelling in de dierentuin.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="team-member">
+        <div class="member-name">Sofie</div>
+        <img src="Sofie.jpg" alt="Sofie" class="member-photo"> zelf enkele jaren van de bachelor diergeneeskunde maar besloot dan over te stappen naar biologie en de lerarenopleiding. Momenteel is ze vooral huisvrouw en mama van 3 jonge kindjes, en runt ze de logies en de boerderij te Fort Groen.</p>
+        <p>Sofie en Niels staan elkaar bij in alle projecten. Zij zal dan ook vaak de persoon zijn met wie u in contact zal treden voor planningen van interventies.</p>
+      </div>
+
+      <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
     </div>
 
-  </div>
+    <!-- ══ FACILITEITEN ══ -->
+    <div id="faciliteiten" class="page">
+      <div class="page-title">De faciliteiten</div>
+
+      <div class="page-body">
+        <p>Momenteel beperkt Niels zich tot huisbezoeken, uitgerust met een verdovingsgeweer, verdovingsproducten en medicatie voor de zorg in eerste lijn.</p>
+        <p>Mogelijk zal er later ook een lokaal ingericht worden met operatietafel en gasanesthesie, zodat er ook in Sint-Truiden zorg voor reptielen, vogels en kleine bijzondere dieren voorzien kan worden.</p>
+      </div>
+
+      <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
+    </div>
+
+    <!-- ══ STUDIES & ERVARING ══ -->
+    <div id="studies" class="page">
+      <div class="page-title">Studies & ervaring</div>
+
+      <div class="timeline-section">
+        <div class="timeline-section-title">Opleidingen</div>
+        <div class="timeline-item">
+          <div class="timeline-year">2008–2011</div>
+          <div class="timeline-text">UGent · Bachelor in de diergeneeskunde, grote onderscheiding</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2011–2014</div>
+          <div class="timeline-text">UGent · Master in de diergeneeskunde, grote onderscheiding</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2017–2018</div>
+          <div class="timeline-text">KU Leuven · Jaar ethiek</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2018–2020</div>
+          <div class="timeline-text">UAntwerpen · Master in Biology of Global Change, onderscheiding</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">Doorlopend</div>
+          <div class="timeline-text">Diverse bijscholingen en congressen, met focus op bijzondere dieren</div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="timeline-section">
+        <div class="timeline-section-title">Werkervaring</div>
+        <div class="timeline-item">
+          <div class="timeline-year">2014–2017</div>
+          <div class="timeline-text">DAP Theo Martens · Gemengde praktijk met diverse dierentuinen en circussen onder het cliënteel</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2016–2020</div>
+          <div class="timeline-text">KMDA · Antwerpse zoo en Planckendael — een paar dagen per maand meelopen met het diergeneeskundig team</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2017</div>
+          <div class="timeline-text">Sanimalia · Meer ervaring in tweedelijnsdiergeneeskunde</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2015–heden</div>
+          <div class="timeline-text">Monde Sauvage Safari Parc · Hoofddierenarts, verantwoordelijk voor de zorg van zo'n 200 diersoorten, met bijdrage aan technische ontwerpen, personeelsmanagement en educatie</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2019–heden</div>
+          <div class="timeline-text">CWPZ (Commission Wallonne des Parcs Zoologiques) · Expert dierentuinen voor de Waalse overheid</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2020–heden</div>
+          <div class="timeline-text">Fort Groen · Renovatie en ontwikkeling van een vierkantshoeve in het teken van permacultuur en zelfvoorzienendheid, met toeristische logies en workshops</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-year">2026–heden</div>
+          <div class="timeline-text">Zelfstandige dierenarts in bijberoep voor bijzondere dieren</div>
+        </div>
+      </div>
+
+      <a class="linkedin-link" href="https://linkedin.com" target="_blank" rel="noopener">
+        🔗 Meer details op LinkedIn
+      </a>
+
+      <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
+    </div>
+
+    <!-- ══ FOTO'S ══ -->
+    <div id="fotos" class="page">
+      <div class="page-title">Foto's</div>
+
+      <div class="page-body">
+        <p>Foto's worden binnenkort toegevoegd.</p>
+      </div>
+
+      <div class="photo-grid">
+        <div class="photo-placeholder">
+          <span>🖼️</span>
+          <div>Foto volgt</div>
+        </div>
+        <div class="photo-placeholder">
+          <span>🖼️</span>
+          <div>Foto volgt</div>
+        </div>
+        <div class="photo-placeholder">
+          <span>🖼️</span>
+          <div>Foto volgt</div>
+        </div>
+        <div class="photo-placeholder">
+          <span>🖼️</span>
+          <div>Foto volgt</div>
+        </div>
+        <div class="photo-placeholder">
+          <span>🖼️</span>
+          <div>Foto volgt</div>
+        </div>
+        <div class="photo-placeholder">
+          <span>🖼️</span>
+          <div>Foto volgt</div>
+        </div>
+      </div>
+
+      <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
+    </div>
+
+    <!-- ══ CONTACT ══ -->
+    <div id="contact" class="page">
+      <div class="page-title">Contact</div>
+
+      <div class="contact-note">
+        Ik beperk me tot zorg of consulting met betrekking tot bijzondere dieren of tele-anesthesie. Hou er rekening mee dat ik 4 dagen per week aan het werk ben in de dierentuin en dus niet op telefonische oproepen kan reageren. Het is altijd beter om een gedetailleerd mailtje of WhatsApp-bericht te sturen.
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-title">Contactgegevens</div>
+        <div class="contact-item">
+          <div class="icon">📍</div>
+          <div>Engelmanshoven (Sint-Truiden)</div>
+        </div>
+        <div class="contact-item">
+          <div class="icon">📞</div>
+          <div>
+            <a href="tel:+32456882310">+32 456 88 23 10</a><br>
+            <span style="font-size:0.85rem; color:rgba(255,255,255,0.5);">Bij voorkeur via WhatsApp of sms</span>
+          </div>
+        </div>
+        <div class="contact-item">
+          <div class="icon">✉️</div>
+          <div><a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a></div>
+        </div>
+      </div>
+
+      <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
+    </div>
+
+  </div><!-- /container -->
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      const navBtns = document.querySelectorAll('nav button');
+      const order = ['home','team','faciliteiten','studies','fotos','contact'];
+      navBtns[order.indexOf(id)].classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+
 </body>
 </html>
-
