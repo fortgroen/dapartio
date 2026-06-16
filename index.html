@@ -241,6 +241,21 @@
 
     .photo-placeholder span { font-size: 1.8rem; }
 
+    .grid-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border-radius: 16px;
+      display: block;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    .grid-photo:hover {
+      transform: scale(1.02);
+      opacity: 0.9;
+      cursor: pointer;
+    }
+
     /* ── STUDIES ── */
     .timeline { list-style: none; }
 
@@ -478,35 +493,29 @@
     <div id="fotos" class="page">
       <div class="page-title">Foto's</div>
 
-      <div class="page-body">
-        <p>Foto's worden binnenkort toegevoegd.</p>
-      </div>
-
       <div class="photo-grid">
-        <div class="photo-placeholder">
-          <span>🖼️</span>
-          <div>Foto volgt</div>
-        </div>
-        <div class="photo-placeholder">
-          <span>🖼️</span>
-          <div>Foto volgt</div>
-        </div>
-        <div class="photo-placeholder">
-          <span>🖼️</span>
-          <div>Foto volgt</div>
-        </div>
-        <div class="photo-placeholder">
-          <span>🖼️</span>
-          <div>Foto volgt</div>
-        </div>
-        <div class="photo-placeholder">
-          <span>🖼️</span>
-          <div>Foto volgt</div>
-        </div>
-        <div class="photo-placeholder">
-          <span>🖼️</span>
-          <div>Foto volgt</div>
-        </div>
+        <img src="1.jpg" alt="Interventie" class="grid-photo">
+        <img src="2.jpg" alt="Interventie" class="grid-photo">
+        <img src="3.jpg" alt="Interventie" class="grid-photo">
+        <img src="4.jpg" alt="Interventie" class="grid-photo">
+        <img src="5.jpg" alt="Interventie" class="grid-photo">
+        <img src="6.jpg" alt="Interventie" class="grid-photo">
+        <img src="7.jpg" alt="Interventie" class="grid-photo">
+        <img src="8.jpg" alt="Interventie" class="grid-photo">
+        <img src="9.jpg" alt="Interventie" class="grid-photo">
+        <img src="10.jpg" alt="Interventie" class="grid-photo">
+        <img src="11.jpg" alt="Interventie" class="grid-photo">
+        <img src="12.jpg" alt="Interventie" class="grid-photo">
+        <img src="13.jpeg" alt="Interventie" class="grid-photo">
+        <img src="14.jpeg" alt="Interventie" class="grid-photo">
+        <img src="15.jpeg" alt="Interventie" class="grid-photo">
+        <img src="16.jpeg" alt="Interventie" class="grid-photo">
+        <img src="17.jpeg" alt="Interventie" class="grid-photo">
+        <img src="18.jpeg" alt="Interventie" class="grid-photo">
+        <img src="19.jpeg" alt="Interventie" class="grid-photo">
+        <img src="20.jpeg" alt="Interventie" class="grid-photo">
+        <img src="21.jpeg" alt="Interventie" class="grid-photo">
+        <img src="22.jpeg" alt="Interventie" class="grid-photo">
       </div>
 
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
