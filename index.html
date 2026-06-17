@@ -7,19 +7,45 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       font-family: 'Inter', sans-serif;
       background:
-        linear-gradient(rgba(8, 18, 14, 0.82), rgba(8, 18, 14, 0.90)),
+        linear-gradient(rgba(8,18,14,0.82), rgba(8,18,14,0.90)),
         url('https://images.unsplash.com/photo-1474511320723-9a56873867b5?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat fixed;
       min-height: 100vh;
-      color: #ffffff;
+      color: #fff;
       padding: 24px 24px 48px;
     }
+
+    /* ── LANGUAGE BAR ── */
+    .lang-bar {
+      display: flex;
+      justify-content: flex-end;
+      max-width: 720px;
+      margin: 0 auto 12px;
+      gap: 6px;
+    }
+    .lang-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 999px;
+      padding: 5px 12px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      line-height: 1;
+      transition: background 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      color: rgba(255,255,255,0.7);
+      font-family: 'Inter', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 500;
+    }
+    .lang-btn:hover { background: rgba(255,255,255,0.16); color: #fff; }
+    .lang-btn.active { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.35); color: #fff; font-weight: 600; }
 
     /* ── NAV ── */
     nav {
@@ -29,7 +55,6 @@
       margin-bottom: 32px;
       flex-wrap: wrap;
     }
-
     nav button {
       background: rgba(255,255,255,0.08);
       border: 1px solid rgba(255,255,255,0.13);
@@ -43,18 +68,8 @@
       transition: background 0.2s, color 0.2s, border-color 0.2s;
       backdrop-filter: blur(8px);
     }
-
-    nav button:hover {
-      background: rgba(255,255,255,0.14);
-      color: #fff;
-    }
-
-    nav button.active {
-      background: rgba(255,255,255,0.18);
-      border-color: rgba(255,255,255,0.35);
-      color: #fff;
-      font-weight: 600;
-    }
+    nav button:hover { background: rgba(255,255,255,0.14); color: #fff; }
+    nav button.active { background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); color: #fff; font-weight: 600; }
 
     /* ── CONTAINER ── */
     .container {
@@ -73,10 +88,11 @@
     /* ── PAGE VISIBILITY ── */
     .page { display: none; }
     .page.active { display: block; }
+    .lang-content { display: none; }
+    .lang-content.active { display: block; }
 
     /* ── HOME ── */
     .home-inner { text-align: center; }
-
     .logo {
       width: 190px; height: 190px;
       margin: 0 auto 34px;
@@ -86,24 +102,9 @@
       overflow: hidden;
       border: 2px solid rgba(255,255,255,0.15);
     }
-
     .logo img { width: 100%; height: 100%; object-fit: cover; }
-
-    h1 {
-      font-size: 2.4rem;
-      font-weight: 700;
-      margin-bottom: 12px;
-      letter-spacing: -1px;
-      line-height: 1.2;
-    }
-
-    .subtitle {
-      font-size: 1.05rem;
-      color: rgba(255,255,255,0.78);
-      margin-bottom: 36px;
-      line-height: 1.7;
-    }
-
+    h1 { font-size: 2.4rem; font-weight: 700; margin-bottom: 12px; letter-spacing: -1px; line-height: 1.2; }
+    .subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.78); margin-bottom: 36px; line-height: 1.7; }
     .status {
       display: inline-block;
       padding: 11px 22px;
@@ -116,221 +117,54 @@
       margin-bottom: 40px;
     }
 
-    /* ── CONTACT BOX (reused across pages) ── */
-    .contact-box {
-      background: rgba(255,255,255,0.07);
-      border-radius: 22px;
-      padding: 28px;
-      text-align: left;
-    }
-
-    .contact-title {
-      font-size: 1.05rem;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
-
-    .contact-item {
-      display: flex;
-      gap: 14px;
-      margin-bottom: 16px;
-      align-items: flex-start;
-      color: rgba(255,255,255,0.9);
-      font-size: 0.96rem;
-      line-height: 1.55;
-    }
-
+    /* ── CONTACT BOX ── */
+    .contact-box { background: rgba(255,255,255,0.07); border-radius: 22px; padding: 28px; text-align: left; }
+    .contact-title { font-size: 1.05rem; font-weight: 600; margin-bottom: 18px; }
+    .contact-item { display: flex; gap: 14px; margin-bottom: 16px; align-items: flex-start; color: rgba(255,255,255,0.9); font-size: 0.96rem; line-height: 1.55; }
     .contact-item:last-child { margin-bottom: 0; }
-
     .icon { font-size: 1.05rem; width: 24px; text-align: center; opacity: 0.9; flex-shrink: 0; padding-top: 2px; }
-
     .contact-item a { color: #fff; text-decoration: none; transition: opacity 0.2s; }
     .contact-item a:hover { opacity: 0.75; }
 
     /* ── SECTION HEADINGS ── */
-    .page-title {
-      font-size: 1.8rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      margin-bottom: 32px;
-    }
+    .page-title { font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; margin-bottom: 32px; }
 
     /* ── TEAM ── */
-    .team-member {
-      margin-bottom: 36px;
-    }
-
+    .team-member { margin-bottom: 36px; }
     .team-member:last-child { margin-bottom: 0; }
-
-    .member-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      font-family: 'Inter', sans-serif;
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .member-name::before {
-      content: '';
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.6);
-      flex-shrink: 0;
-    }
-
-    .team-member p {
-      font-size: 0.95rem;
-      font-family: 'Inter', sans-serif;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.82);
-      margin-bottom: 12px;
-    }
-
+    .member-name { font-size: 1.2rem; font-weight: 700; font-family: 'Inter', sans-serif; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
+    .member-name::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.6); flex-shrink: 0; }
+    .team-member p { font-size: 0.95rem; font-family: 'Inter', sans-serif; line-height: 1.75; color: rgba(255,255,255,0.82); margin-bottom: 12px; }
     .team-member p:last-child { margin-bottom: 0; }
+    .member-photo { width: 120px; height: 120px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid rgba(255,255,255,0.15); margin-bottom: 18px; display: block; }
+    .divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 28px 0; }
 
-    .member-photo {
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      object-position: center top;
-      border: 2px solid rgba(255,255,255,0.15);
-      margin-bottom: 18px;
-      display: block;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      margin: 28px 0;
-    }
-
-    /* ── FACILITEITEN ── */
-    .page-body {
-      font-size: 0.95rem;
-      line-height: 1.78;
-      color: rgba(255,255,255,0.82);
-    }
-
+    /* ── PAGE BODY ── */
+    .page-body { font-size: 0.95rem; line-height: 1.78; color: rgba(255,255,255,0.82); }
     .page-body p { margin-bottom: 16px; }
     .page-body p:last-child { margin-bottom: 0; }
 
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-top: 28px;
-    }
+    /* ── PHOTO GRID ── */
+    .photo-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 28px; }
+    .grid-photo { width: 100%; aspect-ratio: 4/3; object-fit: cover; border-radius: 16px; display: block; transition: transform 0.2s, opacity 0.2s; }
+    .grid-photo:hover { transform: scale(1.02); opacity: 0.9; cursor: pointer; }
 
-    .photo-placeholder {
-      aspect-ratio: 4/3;
-      background: rgba(255,255,255,0.06);
-      border: 1px dashed rgba(255,255,255,0.18);
-      border-radius: 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      color: rgba(255,255,255,0.35);
-      font-size: 0.8rem;
-    }
+    /* ── TIMELINE ── */
+    .timeline-section { margin-bottom: 28px; }
+    .timeline-section-title { font-size: 0.75rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 14px; }
+    .timeline-item { display: flex; gap: 16px; margin-bottom: 12px; align-items: flex-start; }
+    .timeline-year { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.45); white-space: nowrap; min-width: 82px; padding-top: 2px; }
+    .timeline-text { font-size: 0.93rem; line-height: 1.6; color: rgba(255,255,255,0.84); }
 
-    .photo-placeholder span { font-size: 1.8rem; }
-
-    .grid-photo {
-      width: 100%;
-      aspect-ratio: 4/3;
-      object-fit: cover;
-      border-radius: 16px;
-      display: block;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .grid-photo:hover {
-      transform: scale(1.02);
-      opacity: 0.9;
-      cursor: pointer;
-    }
-
-    /* ── STUDIES ── */
-    .timeline { list-style: none; }
-
-    .timeline-section {
-      margin-bottom: 28px;
-    }
-
-    .timeline-section-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
-      margin-bottom: 14px;
-    }
-
-    .timeline-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 12px;
-      align-items: flex-start;
-    }
-
-    .timeline-year {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.45);
-      white-space: nowrap;
-      min-width: 82px;
-      padding-top: 2px;
-    }
-
-    .timeline-text {
-      font-size: 0.93rem;
-      line-height: 1.6;
-      color: rgba(255,255,255,0.84);
-    }
-
-    .linkedin-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 20px;
-      padding: 10px 20px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: #fff;
-      text-decoration: none;
-      font-size: 0.88rem;
-      font-weight: 500;
-      transition: background 0.2s;
-    }
-
+    /* ── LINKEDIN ── */
+    .linkedin-link { display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; padding: 10px 20px; border-radius: 999px; background: rgba(255,255,255,0.10); border: 1px solid rgba(255,255,255,0.14); color: #fff; text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: background 0.2s; }
     .linkedin-link:hover { background: rgba(255,255,255,0.16); }
 
     /* ── CONTACT NOTE ── */
-    .contact-note {
-      background: rgba(255,255,255,0.05);
-      border-left: 3px solid rgba(255,255,255,0.2);
-      border-radius: 0 12px 12px 0;
-      padding: 16px 20px;
-      font-size: 0.92rem;
-      line-height: 1.7;
-      color: rgba(255,255,255,0.78);
-      margin-bottom: 28px;
-    }
+    .contact-note { background: rgba(255,255,255,0.05); border-left: 3px solid rgba(255,255,255,0.2); border-radius: 0 12px 12px 0; padding: 16px 20px; font-size: 0.92rem; line-height: 1.7; color: rgba(255,255,255,0.78); margin-bottom: 28px; }
 
     /* ── FOOTER ── */
-    .footer {
-      margin-top: 36px;
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.45);
-      text-align: center;
-    }
+    .footer { margin-top: 36px; font-size: 0.85rem; color: rgba(255,255,255,0.45); text-align: center; }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 640px) {
@@ -343,156 +177,235 @@
 </head>
 <body>
 
-  <nav>
-    <button class="active" onclick="showPage('home')">Home</button>
-    <button onclick="showPage('team')">Het team</button>
-    <button onclick="showPage('faciliteiten')">Faciliteiten</button>
-    <button onclick="showPage('studies')">Studies & ervaring</button>
-    <button onclick="showPage('fotos')">Foto's</button>
-    <button onclick="showPage('contact')">Contact</button>
-    <button onclick="showPage('voorwaarden')">Algemene voorwaarden</button>
-  </nav>
+  <!-- LANGUAGE BAR -->
+  <div class="lang-bar">
+    <button class="lang-btn active" onclick="setLang('nl')">🇧🇪</button>
+    <button class="lang-btn" onclick="setLang('fr')">🇫🇷</button>
+    <button class="lang-btn" onclick="setLang('en')">🇬🇧</button>
+  </div>
+
+  <!-- NAV (dynamically updated by JS) -->
+  <nav id="main-nav"></nav>
 
   <div class="container">
 
-    <!-- ══ HOME ══ -->
+    <!-- ══════════════════════════════════════════
+         HOME
+    ══════════════════════════════════════════ -->
     <div id="home" class="page active">
       <div class="home-inner">
-        <div class="logo">
-          <img src="Definitief logo.png" alt="Logo Artio dierenarts">
+        <div class="logo"><img src="Definitief logo.png" alt="Logo Artio"></div>
+
+        <div class="lang-content nl active">
+          <h1>Bijzondere zorg voor bijzondere dieren</h1>
+          <p class="subtitle">Gespecialiseerde zorg en ondersteuning voor wilde en exotische dieren.</p>
+          <div class="status">VANAF JULI 2026 VAN START</div>
         </div>
-        <h1>Bijzondere zorg voor bijzondere dieren</h1>
-        <p class="subtitle">
-          Gespecialiseerde zorg en ondersteuning voor wilde en exotische dieren.
-        </p>
-        <div class="status">VANAF JULI 2026 VAN START</div>
+        <div class="lang-content fr">
+          <h1>Des soins exceptionnels pour des animaux exceptionnels</h1>
+          <p class="subtitle">Soins spécialisés et accompagnement pour les animaux sauvages et exotiques.</p>
+          <div class="status">OUVERTURE EN JUILLET 2026</div>
+        </div>
+        <div class="lang-content en">
+          <h1>Exceptional care for exceptional animals</h1>
+          <p class="subtitle">Specialised care and support for wild and exotic animals.</p>
+          <div class="status">OPENING JULY 2026</div>
+        </div>
+
         <div class="contact-box">
-          <div class="contact-title">Contactgegevens</div>
-          <div class="contact-item">
-            <div class="icon">📍</div>
-            <div>Engelmanshoven (Sint-Truiden)</div>
-          </div>
-          <div class="contact-item">
-            <div class="icon">📞</div>
-            <div><a href="tel:+32456882310">+32 456 88 23 10</a></div>
-          </div>
-          <div class="contact-item">
-            <div class="icon">✉️</div>
-            <div><a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a></div>
-          </div>
+          <div class="contact-title lang-content nl active">Contactgegevens</div>
+          <div class="contact-title lang-content fr">Coordonnées</div>
+          <div class="contact-title lang-content en">Contact details</div>
+          <div class="contact-item"><div class="icon">📍</div><div>Engelmanshoven (Sint-Truiden)</div></div>
+          <div class="contact-item"><div class="icon">📞</div><div><a href="tel:+32456882310">+32 456 88 23 10</a></div></div>
+          <div class="contact-item"><div class="icon">✉️</div><div><a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a></div></div>
         </div>
       </div>
     </div>
 
-    <!-- ══ HET TEAM ══ -->
+    <!-- ══════════════════════════════════════════
+         HET TEAM
+    ══════════════════════════════════════════ -->
     <div id="team" class="page">
-      <div class="page-title">Het team</div>
 
-      <div class="team-member">
-        <div class="member-name">Niels</div>
-        <img src="Niels.jfif" alt="Niels" class="member-photo">
-        <p>Al een half jaar nadat Niels afstudeerde dook hij in de dierentuinwereld. Allereerst vanuit een gemengde praktijk, waardoor hij ervaring kon opdoen, van nachtelijke keizersnedes bij rundvee tot het typische eerstelijnswerk bij honden, katten en paarden. Maar al snel groeide de passie voor het werk in Monde Sauvage Safari Parc, Pakawi Park (vroeger Olmense zoo) maar ook de bijzondere dieren bij particulieren, van kleine reptielen, over roofvogels tot alpaca's.</p>
-        <p>Even nog combineerde hij het werk in Monde Sauvage met meer gespecialiseerd werk in dierenkliniek Sanimalia, maar sinds 2017 werkt hij 4 dagen per week als hoofddierenarts in Monde Sauvage. Daarnaast behaalde hij een bijkomende master in biologie, gericht op conservatie en globale problemen, en specialiseerde hij zich verder in bijkomende opleidingen en vormingen.</p>
-        <p>Nu hij een prachtige vierkantshoeve in Sint-Truiden heeft verbouwd als uitvalsbasis, is het tijd om terug als zelfstandige in bijberoep wat bij te springen in de zorg van bijzondere dieren — een veld waar jammer genoeg weinig mensen grondig in geschoold zijn. Hoewel hij niet vies is van gedomesticeerde dieren, wil hij zich toespitsen op exotische dieren en zogenaamde 'nieuwe' gezelschapsdieren: van alpaca's over vogels tot reptielen. Ook voor ontsnapte of gevaarlijke dieren kan hij gecontacteerd worden, al kan aan spoedgevallen zelden beantwoord worden gezien zijn vaste tewerkstelling in de dierentuin.</p>
+      <!-- NL -->
+      <div class="lang-content nl active">
+        <div class="page-title">Het team</div>
+        <div class="team-member">
+          <div class="member-name">Niels</div>
+          <img src="Niels.jfif" alt="Niels" class="member-photo">
+          <p>Al een half jaar nadat Niels afstudeerde dook hij in de dierentuinwereld. Allereerst vanuit een gemengde praktijk, waardoor hij ervaring kon opdoen, van nachtelijke keizersnedes bij rundvee tot het typische eerstelijnswerk bij honden, katten en paarden. Maar al snel groeide de passie voor het werk in Monde Sauvage Safari Parc, Pakawi Park (vroeger Olmense zoo) maar ook de bijzondere dieren bij particulieren, van kleine reptielen, over roofvogels tot alpaca's.</p>
+          <p>Even nog combineerde hij het werk in Monde Sauvage met meer gespecialiseerd werk in dierenkliniek Sanimalia, maar sinds 2017 werkt hij 4 dagen per week als hoofddierenarts in Monde Sauvage. Daarnaast behaalde hij een bijkomende master in biologie, gericht op conservatie en globale problemen, en specialiseerde hij zich verder in bijkomende opleidingen en vormingen.</p>
+          <p>Nu hij een prachtige vierkantshoeve in Sint-Truiden heeft verbouwd als uitvalsbasis, is het tijd om terug als zelfstandige in bijberoep wat bij te springen in de zorg van bijzondere dieren — een veld waar jammer genoeg weinig mensen grondig in geschoold zijn. Hoewel hij niet vies is van gedomesticeerde dieren, wil hij zich toespitsen op exotische dieren en zogenaamde 'nieuwe' gezelschapsdieren: van alpaca's over vogels tot reptielen. Ook voor ontsnapte of gevaarlijke dieren kan hij gecontacteerd worden, al kan aan spoedgevallen zelden beantwoord worden gezien zijn vaste tewerkstelling in de dierentuin.</p>
+        </div>
+        <hr class="divider">
+        <div class="team-member">
+          <div class="member-name">Sofie</div>
+          <img src="Sofie.jpg" alt="Sofie" class="member-photo">
+          <p>Sofie voltooide zelf enkele jaren van de bachelor diergeneeskunde maar besloot dan over te stappen naar biologie en de lerarenopleiding. Momenteel is ze vooral huisvrouw en mama van 3 jonge kindjes, en runt ze de logies en de boerderij te Fort Groen.</p>
+          <p>Sofie en Niels staan elkaar bij in alle projecten. Zij zal dan ook vaak de persoon zijn met wie u in contact zal treden voor planningen van interventies.</p>
+        </div>
       </div>
 
-      <hr class="divider">
+      <!-- FR -->
+      <div class="lang-content fr">
+        <div class="page-title">L'équipe</div>
+        <div class="team-member">
+          <div class="member-name">Niels</div>
+          <img src="Niels.jfif" alt="Niels" class="member-photo">
+          <p>Seulement six mois après l'obtention de son diplôme, Niels plongeait déjà dans le monde des parcs zoologiques. D'abord au sein d'une pratique mixte, ce qui lui a permis d'acquérir une expérience variée — des césariennes nocturnes chez les bovins au travail de première ligne classique avec chiens, chats et chevaux. Mais sa passion pour le travail au Monde Sauvage Safari Parc, au Pakawi Park (anciennement zoo d'Olmense) et pour les animaux particuliers chez les particuliers — des petits reptiles aux rapaces en passant par les alpagas — a vite pris le dessus.</p>
+          <p>Il a brièvement combiné son travail au Monde Sauvage avec une activité plus spécialisée à la clinique vétérinaire Sanimalia, avant de devenir depuis 2017 vétérinaire en chef à temps presque plein au Monde Sauvage (4 jours par semaine). Il a également obtenu un master complémentaire en biologie axé sur la conservation et les problématiques globales, et s'est spécialisé à travers de nombreuses formations continues.</p>
+          <p>Maintenant qu'il a rénové une magnifique ferme carrée à Sint-Truiden comme base d'opérations, il est temps de reprendre une activité indépendante complémentaire pour contribuer aux soins des animaux particuliers — un domaine où malheureusement peu de praticiens sont véritablement formés. Bien qu'il ne soit pas fermé aux animaux domestiques, il souhaite se concentrer sur les animaux exotiques et les « nouveaux » animaux de compagnie : alpagas, oiseaux, reptiles. Il peut également être contacté pour des animaux échappés ou dangereux, même si les urgences peuvent rarement être honorées en raison de son emploi fixe au zoo.</p>
+        </div>
+        <hr class="divider">
+        <div class="team-member">
+          <div class="member-name">Sofie</div>
+          <img src="Sofie.jpg" alt="Sofie" class="member-photo">
+          <p>Sofie a elle-même suivi quelques années de bachelier en médecine vétérinaire avant de se réorienter vers la biologie et la formation d'enseignante. Elle est aujourd'hui principalement maman de 3 jeunes enfants et gère les hébergements et la ferme de Fort Groen.</p>
+          <p>Sofie et Niels se soutiennent mutuellement dans tous leurs projets. C'est souvent elle que vous contacterez pour planifier les interventions.</p>
+        </div>
+      </div>
 
-      <div class="team-member">
-        <div class="member-name">Sofie</div>
-        <img src="Sofie.jpg" alt="Sofie" class="member-photo">
-        <p>Sofie voltooide zelf enkele jaren van de bachelor diergeneeskunde maar besloot dan over te stappen naar biologie en de lerarenopleiding. Momenteel is ze vooral huisvrouw en mama van 3 jonge kindjes, en runt ze de logies en de boerderij te Fort Groen.</p>
-        <p>Sofie en Niels staan elkaar bij in alle projecten. Zij zal dan ook vaak de persoon zijn met wie u in contact zal treden voor planningen van interventies.</p>
+      <!-- EN -->
+      <div class="lang-content en">
+        <div class="page-title">The team</div>
+        <div class="team-member">
+          <div class="member-name">Niels</div>
+          <img src="Niels.jfif" alt="Niels" class="member-photo">
+          <p>Just six months after graduating, Niels dived into the world of zoological parks. Initially through a mixed practice, gaining experience ranging from overnight caesarean sections in cattle to typical first-line work with dogs, cats and horses. But his passion quickly grew for his work at Monde Sauvage Safari Parc, Pakawi Park (formerly Olmense zoo) and for the unusual animals kept by private owners — from small reptiles and birds of prey to alpacas.</p>
+          <p>He briefly combined his work at Monde Sauvage with more specialised work at veterinary clinic Sanimalia, before becoming head veterinarian at Monde Sauvage since 2017 (four days a week). He also obtained an additional master's degree in biology focused on conservation and global challenges, and has continued to specialise through further training and conferences.</p>
+          <p>Now that he has converted a beautiful square farmhouse in Sint-Truiden into his base of operations, the time has come to resume self-employed work alongside his main job — contributing to the care of special animals in a field where, unfortunately, few practitioners are thoroughly trained. While he is not averse to domestic animals, he wishes to focus on exotic animals and so-called 'new' companion animals: alpacas, birds and reptiles. He can also be contacted for escaped or dangerous animals, though emergencies can rarely be accommodated given his fixed employment at the zoo.</p>
+        </div>
+        <hr class="divider">
+        <div class="team-member">
+          <div class="member-name">Sofie</div>
+          <img src="Sofie.jpg" alt="Sofie" class="member-photo">
+          <p>Sofie completed several years of a bachelor's degree in veterinary medicine before switching to biology and teacher training. She is currently primarily a stay-at-home mother of 3 young children, and manages the tourist accommodation and farm at Fort Groen.</p>
+          <p>Sofie and Niels support each other in all their projects. She will often be the person you contact to schedule interventions.</p>
+        </div>
       </div>
 
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
     </div>
 
-    <!-- ══ FACILITEITEN ══ -->
+    <!-- ══════════════════════════════════════════
+         FACILITEITEN
+    ══════════════════════════════════════════ -->
     <div id="faciliteiten" class="page">
-      <div class="page-title">De faciliteiten</div>
-
-      <div class="page-body">
-        <p>Momenteel beperkt Niels zich tot huisbezoeken, uitgerust met een verdovingsgeweer, verdovingsproducten en medicatie voor de zorg in eerste lijn.</p>
-        <p>Mogelijk zal er later ook een lokaal ingericht worden met operatietafel en gasanesthesie, zodat er ook in Sint-Truiden zorg voor reptielen, vogels en kleine bijzondere dieren voorzien kan worden.</p>
+      <div class="lang-content nl active">
+        <div class="page-title">De faciliteiten</div>
+        <div class="page-body">
+          <p>Momenteel beperkt Niels zich tot huisbezoeken, uitgerust met een verdovingsgeweer, verdovingsproducten en medicatie voor de zorg in eerste lijn.</p>
+          <p>Mogelijk zal er later ook een lokaal ingericht worden met operatietafel en gasanesthesie, zodat er ook in Sint-Truiden zorg voor reptielen, vogels en kleine bijzondere dieren voorzien kan worden.</p>
+        </div>
       </div>
-
+      <div class="lang-content fr">
+        <div class="page-title">Les installations</div>
+        <div class="page-body">
+          <p>Actuellement, Niels se limite aux visites à domicile, équipé d'un fusil anesthésiant, de produits d'anesthésie et des médicaments nécessaires aux soins de première ligne.</p>
+          <p>Il est possible qu'un local soit aménagé ultérieurement avec une table d'opération et une anesthésie gazeuse, afin de pouvoir assurer les soins aux reptiles, oiseaux et petits animaux particuliers directement à Sint-Truiden.</p>
+        </div>
+      </div>
+      <div class="lang-content en">
+        <div class="page-title">Facilities</div>
+        <div class="page-body">
+          <p>At present, Niels limits himself to home visits, equipped with a dart gun, anaesthetic products and medication for first-line care.</p>
+          <p>It is possible that a dedicated space will later be set up with an operating table and gas anaesthesia, to allow care for reptiles, birds and small exotic animals directly in Sint-Truiden.</p>
+        </div>
+      </div>
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
     </div>
 
-    <!-- ══ STUDIES & ERVARING ══ -->
+    <!-- ══════════════════════════════════════════
+         STUDIES & ERVARING
+    ══════════════════════════════════════════ -->
     <div id="studies" class="page">
-      <div class="page-title">Studies & ervaring</div>
 
-      <div class="timeline-section">
-        <div class="timeline-section-title">Opleidingen</div>
-        <div class="timeline-item">
-          <div class="timeline-year">2008–2011</div>
-          <div class="timeline-text">UGent · Bachelor in de diergeneeskunde, grote onderscheiding</div>
+      <!-- NL -->
+      <div class="lang-content nl active">
+        <div class="page-title">Studies & ervaring</div>
+        <div class="timeline-section">
+          <div class="timeline-section-title">Opleidingen</div>
+          <div class="timeline-item"><div class="timeline-year">2008–2011</div><div class="timeline-text">UGent · Bachelor in de diergeneeskunde, grote onderscheiding</div></div>
+          <div class="timeline-item"><div class="timeline-year">2011–2014</div><div class="timeline-text">UGent · Master in de diergeneeskunde, grote onderscheiding</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017–2018</div><div class="timeline-text">KU Leuven · Jaar ethiek</div></div>
+          <div class="timeline-item"><div class="timeline-year">2018–2020</div><div class="timeline-text">UAntwerpen · Master in Biology of Global Change, onderscheiding</div></div>
+          <div class="timeline-item"><div class="timeline-year">Doorlopend</div><div class="timeline-text">Diverse bijscholingen en congressen, met focus op bijzondere dieren</div></div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2011–2014</div>
-          <div class="timeline-text">UGent · Master in de diergeneeskunde, grote onderscheiding</div>
+        <hr class="divider">
+        <div class="timeline-section">
+          <div class="timeline-section-title">Werkervaring</div>
+          <div class="timeline-item"><div class="timeline-year">2014–2017</div><div class="timeline-text">DAP Theo Martens · Gemengde praktijk met diverse dierentuinen en circussen onder het cliënteel</div></div>
+          <div class="timeline-item"><div class="timeline-year">2016–2020</div><div class="timeline-text">KMDA · Antwerpse zoo en Planckendael — een paar dagen per maand meelopen met het diergeneeskundig team</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017</div><div class="timeline-text">Sanimalia · Meer ervaring in tweedelijnsdiergeneeskunde</div></div>
+          <div class="timeline-item"><div class="timeline-year">2015–heden</div><div class="timeline-text">Monde Sauvage Safari Parc · Hoofddierenarts, verantwoordelijk voor de zorg van zo'n 200 diersoorten, met bijdrage aan technische ontwerpen, personeelsmanagement en educatie</div></div>
+          <div class="timeline-item"><div class="timeline-year">2019–heden</div><div class="timeline-text">CWPZ (Commission Wallonne des Parcs Zoologiques) · Expert dierentuinen voor de Waalse overheid</div></div>
+          <div class="timeline-item"><div class="timeline-year">2020–heden</div><div class="timeline-text">Fort Groen · Renovatie en ontwikkeling van een vierkantshoeve in het teken van permacultuur en zelfvoorzienendheid, met toeristische logies en workshops</div></div>
+          <div class="timeline-item"><div class="timeline-year">2026–heden</div><div class="timeline-text">Zelfstandige dierenarts in bijberoep voor bijzondere dieren</div></div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2017–2018</div>
-          <div class="timeline-text">KU Leuven · Jaar ethiek</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2018–2020</div>
-          <div class="timeline-text">UAntwerpen · Master in Biology of Global Change, onderscheiding</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">Doorlopend</div>
-          <div class="timeline-text">Diverse bijscholingen en congressen, met focus op bijzondere dieren</div>
-        </div>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/niels-schouteden-59b8a6a3" target="_blank" rel="noopener">🔗 Meer details op LinkedIn</a>
       </div>
 
-      <hr class="divider">
-
-      <div class="timeline-section">
-        <div class="timeline-section-title">Werkervaring</div>
-        <div class="timeline-item">
-          <div class="timeline-year">2014–2017</div>
-          <div class="timeline-text">DAP Theo Martens · Gemengde praktijk met diverse dierentuinen en circussen onder het cliënteel</div>
+      <!-- FR -->
+      <div class="lang-content fr">
+        <div class="page-title">Études & expérience</div>
+        <div class="timeline-section">
+          <div class="timeline-section-title">Formation</div>
+          <div class="timeline-item"><div class="timeline-year">2008–2011</div><div class="timeline-text">UGent · Bachelier en médecine vétérinaire, grande distinction</div></div>
+          <div class="timeline-item"><div class="timeline-year">2011–2014</div><div class="timeline-text">UGent · Master en médecine vétérinaire, grande distinction</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017–2018</div><div class="timeline-text">KU Leuven · Année d'éthique</div></div>
+          <div class="timeline-item"><div class="timeline-year">2018–2020</div><div class="timeline-text">UAntwerpen · Master en biologie du changement global, distinction</div></div>
+          <div class="timeline-item"><div class="timeline-year">En continu</div><div class="timeline-text">Formations continues et congrès, axés sur les animaux particuliers</div></div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2016–2020</div>
-          <div class="timeline-text">KMDA · Antwerpse zoo en Planckendael — een paar dagen per maand meelopen met het diergeneeskundig team</div>
+        <hr class="divider">
+        <div class="timeline-section">
+          <div class="timeline-section-title">Expérience professionnelle</div>
+          <div class="timeline-item"><div class="timeline-year">2014–2017</div><div class="timeline-text">DAP Theo Martens · Pratique mixte avec parcs zoologiques et cirques parmi la clientèle</div></div>
+          <div class="timeline-item"><div class="timeline-year">2016–2020</div><div class="timeline-text">KMDA · Zoo d'Anvers et Planckendael — quelques jours par mois au sein de l'équipe vétérinaire</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017</div><div class="timeline-text">Sanimalia · Expérience en médecine vétérinaire de deuxième ligne</div></div>
+          <div class="timeline-item"><div class="timeline-year">2015–auj.</div><div class="timeline-text">Monde Sauvage Safari Parc · Vétérinaire en chef, responsable des soins d'environ 200 espèces animales, avec contribution à la conception technique, à la gestion du personnel et à l'éducation</div></div>
+          <div class="timeline-item"><div class="timeline-year">2019–auj.</div><div class="timeline-text">CWPZ (Commission Wallonne des Parcs Zoologiques) · Expert zoos pour le gouvernement wallon</div></div>
+          <div class="timeline-item"><div class="timeline-year">2020–auj.</div><div class="timeline-text">Fort Groen · Rénovation et développement d'une ferme carrée axée sur la permaculture et l'autosuffisance, avec hébergement touristique et ateliers</div></div>
+          <div class="timeline-item"><div class="timeline-year">2026–auj.</div><div class="timeline-text">Vétérinaire indépendant en activité complémentaire pour animaux particuliers</div></div>
         </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2017</div>
-          <div class="timeline-text">Sanimalia · Meer ervaring in tweedelijnsdiergeneeskunde</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2015–heden</div>
-          <div class="timeline-text">Monde Sauvage Safari Parc · Hoofddierenarts, verantwoordelijk voor de zorg van zo'n 200 diersoorten, met bijdrage aan technische ontwerpen, personeelsmanagement en educatie</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2019–heden</div>
-          <div class="timeline-text">CWPZ (Commission Wallonne des Parcs Zoologiques) · Expert dierentuinen voor de Waalse overheid</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2020–heden</div>
-          <div class="timeline-text">Fort Groen · Renovatie en ontwikkeling van een vierkantshoeve in het teken van permacultuur en zelfvoorzienendheid, met toeristische logies en workshops</div>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-year">2026–heden</div>
-          <div class="timeline-text">Zelfstandige dierenarts in bijberoep voor bijzondere dieren</div>
-        </div>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/niels-schouteden-59b8a6a3" target="_blank" rel="noopener">🔗 Plus de détails sur LinkedIn</a>
       </div>
 
-      <a class="linkedin-link" href="https://linkedin.com" target="_blank" rel="noopener">
-        🔗 Meer details op LinkedIn
-      </a>
+      <!-- EN -->
+      <div class="lang-content en">
+        <div class="page-title">Education & experience</div>
+        <div class="timeline-section">
+          <div class="timeline-section-title">Education</div>
+          <div class="timeline-item"><div class="timeline-year">2008–2011</div><div class="timeline-text">UGent · Bachelor in Veterinary Medicine, great distinction</div></div>
+          <div class="timeline-item"><div class="timeline-year">2011–2014</div><div class="timeline-text">UGent · Master in Veterinary Medicine, great distinction</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017–2018</div><div class="timeline-text">KU Leuven · Year of ethics</div></div>
+          <div class="timeline-item"><div class="timeline-year">2018–2020</div><div class="timeline-text">UAntwerpen · Master in Biology of Global Change, distinction</div></div>
+          <div class="timeline-item"><div class="timeline-year">Ongoing</div><div class="timeline-text">Continuing education and conferences, focused on exotic and wild animals</div></div>
+        </div>
+        <hr class="divider">
+        <div class="timeline-section">
+          <div class="timeline-section-title">Work experience</div>
+          <div class="timeline-item"><div class="timeline-year">2014–2017</div><div class="timeline-text">DAP Theo Martens · Mixed practice including zoological parks and circuses</div></div>
+          <div class="timeline-item"><div class="timeline-year">2016–2020</div><div class="timeline-text">KMDA · Antwerp Zoo and Planckendael — joining the veterinary team a few days per month</div></div>
+          <div class="timeline-item"><div class="timeline-year">2017</div><div class="timeline-text">Sanimalia · Experience in second-line veterinary medicine</div></div>
+          <div class="timeline-item"><div class="timeline-year">2015–present</div><div class="timeline-text">Monde Sauvage Safari Parc · Head veterinarian, responsible for the care of approximately 200 animal species, with contributions to technical design, staff management and education</div></div>
+          <div class="timeline-item"><div class="timeline-year">2019–present</div><div class="timeline-text">CWPZ (Commission Wallonne des Parcs Zoologiques) · Expert advisor on zoos for the Walloon government</div></div>
+          <div class="timeline-item"><div class="timeline-year">2020–present</div><div class="timeline-text">Fort Groen · Renovation and development of a square farmhouse focused on permaculture and self-sufficiency, with tourist accommodation and workshops</div></div>
+          <div class="timeline-item"><div class="timeline-year">2026–present</div><div class="timeline-text">Self-employed veterinarian (secondary occupation) for exotic and special animals</div></div>
+        </div>
+        <a class="linkedin-link" href="https://www.linkedin.com/in/niels-schouteden-59b8a6a3" target="_blank" rel="noopener">🔗 More details on LinkedIn</a>
+      </div>
 
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
     </div>
 
-    <!-- ══ FOTO'S ══ -->
+    <!-- ══════════════════════════════════════════
+         FOTO'S
+    ══════════════════════════════════════════ -->
     <div id="fotos" class="page">
-      <div class="page-title">Foto's</div>
-
+      <div class="lang-content nl active"><div class="page-title">Foto's</div></div>
+      <div class="lang-content fr"><div class="page-title">Photos</div></div>
+      <div class="lang-content en"><div class="page-title">Photos</div></div>
       <div class="photo-grid">
         <img src="1.jpg" alt="Interventie" class="grid-photo">
         <img src="2.jpg" alt="Interventie" class="grid-photo">
@@ -517,163 +430,269 @@
         <img src="21.jpeg" alt="Interventie" class="grid-photo">
         <img src="22.jpeg" alt="Interventie" class="grid-photo">
       </div>
-
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
     </div>
 
-    <!-- ══ CONTACT ══ -->
+    <!-- ══════════════════════════════════════════
+         CONTACT
+    ══════════════════════════════════════════ -->
     <div id="contact" class="page">
-      <div class="page-title">Contact</div>
 
-      <div class="contact-note">
-        Ik beperk me tot zorg of consulting met betrekking tot bijzondere dieren of tele-anesthesie. Hou er rekening mee dat ik 4 dagen per week aan het werk ben in de dierentuin en dus niet op telefonische oproepen kan reageren. Het is altijd beter om een gedetailleerd mailtje of WhatsApp-bericht te sturen.
+      <div class="lang-content nl active">
+        <div class="page-title">Contact</div>
+        <div class="contact-note">Ik beperk me tot zorg of consulting met betrekking tot bijzondere dieren of tele-anesthesie. Hou er rekening mee dat ik 4 dagen per week aan het werk ben in de dierentuin en dus niet op telefonische oproepen kan reageren. Het is altijd beter om een gedetailleerd mailtje of WhatsApp-bericht te sturen.</div>
+      </div>
+      <div class="lang-content fr">
+        <div class="page-title">Contact</div>
+        <div class="contact-note">Je me limite aux soins ou au conseil concernant les animaux particuliers ou la télé-anesthésie. Veuillez noter que je travaille 4 jours par semaine au zoo et ne peux donc pas répondre aux appels téléphoniques. Il est toujours préférable d'envoyer un e-mail détaillé ou un message WhatsApp.</div>
+      </div>
+      <div class="lang-content en">
+        <div class="page-title">Contact</div>
+        <div class="contact-note">I limit myself to care or consulting regarding exotic animals or tele-anaesthesia. Please note that I work 4 days a week at the zoo and am therefore unable to answer phone calls. It is always better to send a detailed e-mail or WhatsApp message.</div>
       </div>
 
       <div class="contact-box">
-        <div class="contact-title">Contactgegevens</div>
-        <div class="contact-item">
-          <div class="icon">📍</div>
-          <div>Engelmanshoven (Sint-Truiden)</div>
-        </div>
+        <div class="contact-title lang-content nl active">Contactgegevens</div>
+        <div class="contact-title lang-content fr">Coordonnées</div>
+        <div class="contact-title lang-content en">Contact details</div>
+        <div class="contact-item"><div class="icon">📍</div><div>Engelmanshoven (Sint-Truiden)</div></div>
         <div class="contact-item">
           <div class="icon">📞</div>
           <div>
             <a href="tel:+32456882310">+32 456 88 23 10</a><br>
-            <span style="font-size:0.85rem; color:rgba(255,255,255,0.5);">Bij voorkeur via WhatsApp of sms</span>
+            <span class="lang-content nl active" style="font-size:0.85rem; color:rgba(255,255,255,0.5); display:inline;">Bij voorkeur via WhatsApp of sms</span>
+            <span class="lang-content fr" style="font-size:0.85rem; color:rgba(255,255,255,0.5); display:none;">De préférence via WhatsApp ou SMS</span>
+            <span class="lang-content en" style="font-size:0.85rem; color:rgba(255,255,255,0.5); display:none;">Preferably via WhatsApp or SMS</span>
           </div>
         </div>
-        <div class="contact-item">
-          <div class="icon">✉️</div>
-          <div><a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a></div>
-        </div>
+        <div class="contact-item"><div class="icon">✉️</div><div><a href="mailto:artio.dap@gmail.com">artio.dap@gmail.com</a></div></div>
       </div>
 
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
     </div>
 
-    <!-- ══ ALGEMENE VOORWAARDEN ══ -->
+    <!-- ══════════════════════════════════════════
+         ALGEMENE VOORWAARDEN
+    ══════════════════════════════════════════ -->
     <div id="voorwaarden" class="page">
-      <div class="page-title">Algemene voorwaarden</div>
 
-      <div class="page-body" style="font-size:0.88rem;">
+      <!-- NL -->
+      <div class="lang-content nl active">
+        <div class="page-title">Algemene voorwaarden</div>
+        <div class="page-body" style="font-size:0.88rem;">
+          <p style="color:rgba(255,255,255,0.45); margin-bottom:24px;">DAP Artio · Niels Schouteden · Luikersteenweg 479A, 3800 Sint-Truiden<br>BTW BE0561931985 · Ordenr. N5383 · Laatst bijgewerkt: juni 2026</p>
 
-        <p style="color:rgba(255,255,255,0.45); margin-bottom:24px;">
-          DAP Artio · Niels Schouteden · Luikersteenweg 479A, 3800 Sint-Truiden<br>
-          BTW BE0561931985 · Ordenr. N5383 · Laatst bijgewerkt: juni 2026
-        </p>
-
-        <div class="timeline-section-title">1. Richtlijnen Prijzen</div>
-        <p>Onderstaande prijzen zijn richtprijzen exclusief BTW. Elk geval is anders — bij twijfel of voor een vrijblijvende inschatting kunt u steeds contact opnemen.</p>
-
-        <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
-          <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);">
-            <span style="color:rgba(255,255,255,0.7);">Uurprijs — geplande interventie</span>
-            <span style="font-weight:600;">€ 250 excl. BTW</span>
+          <div class="timeline-section-title">1. Richtlijnen Prijzen</div>
+          <p>Onderstaande prijzen zijn richtprijzen exclusief BTW. Elk geval is anders — bij twijfel of voor een vrijblijvende inschatting kunt u steeds contact opnemen.</p>
+          <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);"><span style="color:rgba(255,255,255,0.7);">Uurprijs — geplande interventie</span><span style="font-weight:600;">€ 250 excl. BTW</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Effectief gepresteerde uren; verplaatsingstijd niet inbegrepen.</p>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);"><span style="color:rgba(255,255,255,0.7);">Uurprijs — spoedgeval / buiten planning</span><span style="font-weight:600;">€ 350 excl. BTW</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Enkel op beschikbaarheid.</p>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="color:rgba(255,255,255,0.7);">Transportvergoeding</span><span style="font-weight:600;">€ 0,8568 / km</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:0;">Retour, berekend op basis van 2× de officiële fiscale kilometervergoeding (FOD Financiën); jaarlijks geïndexeerd.</p>
           </div>
-          <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Effectief gepresteerde uren; verplaatsingstijd niet inbegrepen.</p>
-          <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);">
-            <span style="color:rgba(255,255,255,0.7);">Uurprijs — spoedgeval / buiten planning</span>
-            <span style="font-weight:600;">€ 350 excl. BTW</span>
+          <p style="margin-top:16px;"><strong style="color:rgba(255,255,255,0.7);">Minimumuren bij interventies op afstand</strong><br>De effectief gepresteerde uren worden aangerekend. Bij interventies op grotere afstand geldt een contractueel minimum, enkel van toepassing indien de effectief gepresteerde tijd lager ligt:</p>
+          <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; font-size:0.85rem;">
+              <span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Afstand (enkele rit)</span><span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Minimum</span>
+              <span style="color:rgba(255,255,255,0.75);">&lt; 20 km</span><span>Geen minimum</span>
+              <span style="color:rgba(255,255,255,0.75);">20–50 km</span><span>1 uur</span>
+              <span style="color:rgba(255,255,255,0.75);">50–100 km</span><span>2 uur</span>
+              <span style="color:rgba(255,255,255,0.75);">100–150 km</span><span>3 uur</span>
+              <span style="color:rgba(255,255,255,0.75);">&gt; 150 km</span><span>Individueel te bespreken</span>
+            </div>
           </div>
-          <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Enkel op beschikbaarheid.</p>
-          <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
-            <span style="color:rgba(255,255,255,0.7);">Transportvergoeding</span>
-            <span style="font-weight:600;">€ 0,8568 / km</span>
-          </div>
-          <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:0;">Retour, berekend op basis van 2× de officiële fiscale kilometervergoeding (FOD Financiën); jaarlijks geïndexeerd.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">Producten en geneesmiddelen</strong><br>Producten en geneesmiddelen worden doorgerekend aan indicatieve groothandelsprijzen, vermeerderd met een administratieve kost. Een gedetailleerde prijslijst is op aanvraag beschikbaar.</p>
+          <p>Alle vermelde prijzen zijn exclusief BTW. Het toepasselijke BTW-tarief bedraagt 6% voor diergeneeskundige diensten aan voedselproducerende dieren (landbouwdienst, Rubriek XXIV KB nr. 20) en 21% in overige gevallen.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">2. Beschikbaarheid en doorverwijzing</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.1 Praktijkformule</strong><br>DAP Artio is een gespecialiseerde mobiele praktijk voor exotische, wilde en bijzondere dieren, uitsluitend werkend op basis van geplande interventies. Aanvragen dienen bij voorkeur te worden ingediend per e-mail of WhatsApp-bericht. Contact: artio.dap@gmail.com · +32 456 88 23 10.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.2 Onbeschikbaarheid en doorverwijzing</strong><br>Wanneer DAP Artio niet beschikbaar is, wordt de opdrachtgever zo snel mogelijk doorverwezen naar een collega of de wachtdienst, conform art. 10 van de Code der Plichtenleer van de Orde der Dierenartsen (editie 2024).<br><br>In geval van onbeschikbaarheid kan DAP Artio, in onderling overleg en met voorafgaand akkoord van Dr. Olivier Bertrand, specialistische gevallen doorverwijzen naar:<br><span style="color:rgba(255,255,255,0.6);">Dr. Olivier Bertrand · Bertrand &amp; Bartholomé Vétérinaires Associés · Rue Malispré 9, 5580 Han-sur-Lesse · www.docveto.be</span><br><br>Voor spoedgevallen met gezelschapsdieren of gangbare landbouwdieren wordt doorverwezen naar de lokale wachtdienst dierenartsen.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.3 Aansprakelijkheidsbeperking bij niet-geplande interventies</strong><br>DAP Artio kan niet aansprakelijk worden gesteld voor schade die voortvloeit uit de onmogelijkheid een niet-geplande interventie uit te voeren, mits de opdrachtgever tijdig werd doorverwezen.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">3. Toepassingsgebied</div>
+          <p>Deze algemene voorwaarden zijn van toepassing op alle diensten en leveringen verstrekt door dierenarts Niels Schouteden, handelend onder de naam DAP Artio. Door het aanvaarden van een offerte, het ondertekenen van een document of het laten uitvoeren van een interventie, erkent de opdrachtgever kennis te hebben genomen van en akkoord te gaan met deze voorwaarden.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">4. Betalingsvoorwaarden</div>
+          <p>Facturen zijn betaalbaar binnen de 15 dagen na factuurdatum. Bij gebreke aan tijdige betaling zijn van rechtswege verwijlinteresten verschuldigd aan de wettelijke interestvoet. Bij aanhoudende wanbetaling behoudt DAP Artio zich het recht voor een forfaitaire schadevergoeding van 10% aan te rekenen, met een minimum van EUR 50,00. Bij geschillen zijn uitsluitend de rechtbanken van het arrondissement Hasselt bevoegd.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">5. Aansprakelijkheid</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.1 Inspanningsverbintenis</strong><br>De dierenarts verbindt zich ertoe alle redelijkerwijs te verwachten vakkennis en middelen in te zetten (art. 1137 BW). Er bestaat geen resultaatsverbintenis.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.2 Beperking van aansprakelijkheid</strong><br>DAP Artio is slechts aansprakelijk voor schade die rechtstreeks voortvloeit uit bewezen zware fout of opzet. De aansprakelijkheid is beperkt tot het bedrag van de betrokken factuur.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.3 Risico-aansprakelijkheid dieren</strong><br>De eigenaar blijft te allen tijde risicoaansprakelijk voor schade veroorzaakt door het dier, ook tijdens en na een veterinaire interventie (art. 1385 BW).</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">6. Tele-anesthesie</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.1 Wettelijk kader</strong><br>Tele-anesthesie wordt uitgevoerd conform art. 2 §3 van de Wet van 28 augustus 1991 en het KB van 21 juli 2016.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.2 Overdracht van aansprakelijkheid</strong><br>De opdrachtgever ondertekent voorafgaand een afzonderlijke Verklaring van Verantwoordelijkheid en aanvaardt uitdrukkelijk de professionele aansprakelijkheid van de dierenarts voor schade die rechtstreeks voortvloeit uit de tele-anesthesie (art. 1134 BW).</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.3 Verplichtingen opdrachtgever</strong><br>De opdrachtgever verbindt zich ertoe alle veiligheidsmaatregelen te treffen, de instructies strikt op te volgen en in te staan voor de correcte nazorg van het verdoofde dier.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">7. Gebruik van geneesmiddelen — voedselketen</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">7.1</strong> Het gebruik van diergeneesmiddelen gebeurt conform Verordening (EU) 2019/6 en het KB van 21 juli 2016. Voor toediening aan voedselproducerende dieren wordt een TVD opgesteld.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">7.2</strong> De eigenaar is verplicht de wachttijden op het TVD strikt na te leven.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">7.3</strong> Noodgebruik via cascadesysteem (art. 113 Verordening (EU) 2019/6) is mogelijk onder verantwoordelijkheid van de dierenarts.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">7.4</strong> Dieren waarvoor geen wachttijd kon worden vastgesteld worden definitief uitgesloten uit de menselijke voedselketen.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">8. Overmacht en spoedgevallen</div>
+          <p>DAP Artio is niet aansprakelijk voor niet-tijdige uitvoering als gevolg van overmacht. Gezien de praktijkstructuur kan niet steeds onmiddellijk gereageerd worden op spoedgevallen; opdrachtgevers worden doorverwezen conform art. 2.2.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">9. Privacy</div>
+          <p>Persoonsgegevens worden uitsluitend verwerkt in het kader van de dienstverleningsovereenkomst en de wettelijke bewaarplichten. Gegevens worden niet doorgegeven aan derden buiten de wettelijke verplichtingen.</p>
+          <hr class="divider">
+          <p style="color:rgba(255,255,255,0.38); font-size:0.8rem; line-height:1.7;">Wettelijke referenties: Wet 28 augustus 1991 · KB 21 juli 2016 · Verordening (EU) 2019/6 · MB 27 augustus 2024 · BW art. 1134, 1137, 1382–1386bis · Code der Plichtenleer Orde der Dierenartsen editie 2024 · WER.</p>
         </div>
+      </div>
 
-        <p style="margin-top:16px;"><strong style="color:rgba(255,255,255,0.7);">Minimumuren bij interventies op afstand</strong><br>
-        De effectief gepresteerde uren worden aangerekend. Bij interventies op grotere afstand geldt een contractueel minimum, enkel van toepassing indien de effectief gepresteerde tijd lager ligt:</p>
+      <!-- FR -->
+      <div class="lang-content fr">
+        <div class="page-title">Conditions générales</div>
+        <div class="page-body" style="font-size:0.88rem;">
+          <p style="color:rgba(255,255,255,0.45); margin-bottom:24px;">DAP Artio · Niels Schouteden · Luikersteenweg 479A, 3800 Sint-Truiden<br>TVA BE0561931985 · N° Ordre N5383 · Dernière mise à jour : juin 2026</p>
 
-        <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; font-size:0.85rem;">
-            <span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Afstand (enkele rit)</span>
-            <span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Minimum</span>
-            <span style="color:rgba(255,255,255,0.75);">&lt; 20 km</span><span>Geen minimum</span>
-            <span style="color:rgba(255,255,255,0.75);">20–50 km</span><span>1 uur</span>
-            <span style="color:rgba(255,255,255,0.75);">50–100 km</span><span>2 uur</span>
-            <span style="color:rgba(255,255,255,0.75);">100–150 km</span><span>3 uur</span>
-            <span style="color:rgba(255,255,255,0.75);">&gt; 150 km</span><span>Individueel te bespreken</span>
+          <div class="timeline-section-title">1. Tarifs indicatifs</div>
+          <p>Les tarifs ci-dessous sont indicatifs, hors TVA. Chaque cas est différent — en cas de doute ou pour une estimation sans engagement, n'hésitez pas à prendre contact.</p>
+          <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);"><span style="color:rgba(255,255,255,0.7);">Tarif horaire — intervention planifiée</span><span style="font-weight:600;">250 € HTVA</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Heures effectivement prestées ; déplacement non compris.</p>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);"><span style="color:rgba(255,255,255,0.7);">Tarif horaire — urgence / hors planification</span><span style="font-weight:600;">350 € HTVA</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Uniquement selon disponibilité.</p>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="color:rgba(255,255,255,0.7);">Indemnité kilométrique</span><span style="font-weight:600;">0,8568 € / km</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:0;">Aller-retour, calculé sur base de 2× l'indemnité fiscale officielle (SPF Finances) ; indexé annuellement.</p>
           </div>
+          <p style="margin-top:16px;"><strong style="color:rgba(255,255,255,0.7);">Heures minimales pour les interventions à distance</strong><br>Les heures effectivement prestées sont facturées. Pour les interventions à plus grande distance, un minimum contractuel s'applique uniquement si le temps effectivement presté est inférieur :</p>
+          <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; font-size:0.85rem;">
+              <span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Distance (aller simple)</span><span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Minimum</span>
+              <span style="color:rgba(255,255,255,0.75);">&lt; 20 km</span><span>Aucun minimum</span>
+              <span style="color:rgba(255,255,255,0.75);">20–50 km</span><span>1 heure</span>
+              <span style="color:rgba(255,255,255,0.75);">50–100 km</span><span>2 heures</span>
+              <span style="color:rgba(255,255,255,0.75);">100–150 km</span><span>3 heures</span>
+              <span style="color:rgba(255,255,255,0.75);">&gt; 150 km</span><span>À convenir individuellement</span>
+            </div>
+          </div>
+          <p><strong style="color:rgba(255,255,255,0.7);">Produits et médicaments</strong><br>Les produits et médicaments sont refacturés aux prix indicatifs de gros, majorés d'un coût administratif. Une liste de prix détaillée est disponible sur demande.</p>
+          <p>Tous les prix sont hors TVA. Le taux applicable est de 6% pour les services vétérinaires aux animaux producteurs d'aliments et de 21% dans les autres cas.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">2. Disponibilité et renvoi</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.1</strong> DAP Artio est une pratique mobile spécialisée, travaillant exclusivement sur base d'interventions planifiées. Contact : artio.dap@gmail.com · +32 456 88 23 10.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.2</strong> En cas d'indisponibilité, le mandant est renvoyé vers un confrère ou le service de garde. DAP Artio peut renvoyer vers : <span style="color:rgba(255,255,255,0.6);">Dr. Olivier Bertrand · Bertrand &amp; Bartholomé Vétérinaires Associés · Rue Malispré 9, 5580 Han-sur-Lesse · www.docveto.be</span></p>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.3</strong> DAP Artio ne peut être tenu responsable des dommages résultant de l'impossibilité d'effectuer une intervention non planifiée, à condition que le mandant ait été renvoyé en temps utile.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">3. Champ d'application</div>
+          <p>Les présentes conditions générales s'appliquent à tous les services et fournitures de DAP Artio. En acceptant un devis ou en faisant réaliser une intervention, le mandant reconnaît en avoir pris connaissance et les accepter.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">4. Conditions de paiement</div>
+          <p>Les factures sont payables dans les 15 jours suivant la date de facturation. En cas de retard, des intérêts moratoires légaux sont dus de plein droit. En cas d'impayé persistant, une indemnité forfaitaire de 10% (minimum 50 €) peut être réclamée. Tout litige relève exclusivement des tribunaux de l'arrondissement de Hasselt.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">5. Responsabilité</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.1</strong> Le vétérinaire s'engage à mettre en œuvre toutes les compétences raisonnablement attendues (obligation de moyens). Aucun résultat spécifique ne peut être garanti.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.2</strong> DAP Artio n'est responsable que des dommages résultant directement d'une faute grave prouvée ou d'un dol. La responsabilité est limitée au montant de la facture concernée.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.3</strong> Le propriétaire reste en tout temps responsable des dommages causés par son animal, y compris pendant et après l'intervention.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">6. Télé-anesthésie</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.1</strong> La télé-anesthésie est réalisée conformément à la législation belge applicable.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.2</strong> Le mandant signe préalablement une Déclaration de Responsabilité et accepte expressément la responsabilité professionnelle du vétérinaire pour les dommages résultant directement de l'exécution de la télé-anesthésie.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.3</strong> Le mandant s'engage à prendre toutes les mesures de sécurité nécessaires et à assurer les soins post-intervention de l'animal anesthésié.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">7. Utilisation des médicaments — chaîne alimentaire</div>
+          <p>L'utilisation des médicaments vétérinaires est conforme au Règlement (UE) 2019/6 et à l'AR du 21 juillet 2016. Un document de prescription est établi pour tout traitement d'animaux producteurs d'aliments. Le propriétaire est tenu de respecter les délais d'attente. Les animaux traités avec un médicament sans délai d'attente établi sont définitivement exclus de la chaîne alimentaire humaine.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">8. Force majeure et urgences</div>
+          <p>DAP Artio n'est pas responsable des interventions non réalisées en raison de force majeure. Compte tenu de la structure de la pratique, DAP Artio ne peut pas toujours répondre immédiatement aux urgences ; les mandants sont renvoyés conformément à l'article 2.2.</p>
+          <hr class="divider">
+
+          <div class="timeline-section-title">9. Vie privée</div>
+          <p>Les données personnelles sont traitées uniquement dans le cadre de la relation contractuelle et des obligations légales de conservation. Elles ne sont pas transmises à des tiers en dehors des obligations légales.</p>
+          <hr class="divider">
+          <p style="color:rgba(255,255,255,0.38); font-size:0.8rem; line-height:1.7;">Références légales : Loi 28 août 1991 · AR 21 juillet 2016 · Règlement (UE) 2019/6 · AM 27 août 2024 · Code civil art. 1134, 1137, 1382–1386bis · Code de déontologie de l'Ordre des Médecins Vétérinaires éd. 2024 · CEL.</p>
         </div>
+      </div>
 
-        <p><strong style="color:rgba(255,255,255,0.7);">Producten en geneesmiddelen</strong><br>
-        Producten en geneesmiddelen worden doorgerekend aan indicatieve groothandelsprijzen, vermeerderd met een administratieve kost. Een gedetailleerde prijslijst is op aanvraag beschikbaar.</p>
-        <p>Alle vermelde prijzen zijn exclusief BTW. Het toepasselijke BTW-tarief bedraagt 6% voor diergeneeskundige diensten aan voedselproducerende dieren (landbouwdienst, Rubriek XXIV KB nr. 20) en 21% in overige gevallen.</p>
+      <!-- EN -->
+      <div class="lang-content en">
+        <div class="page-title">Terms & conditions</div>
+        <div class="page-body" style="font-size:0.88rem;">
+          <p style="color:rgba(255,255,255,0.45); margin-bottom:24px;">DAP Artio · Niels Schouteden · Luikersteenweg 479A, 3800 Sint-Truiden<br>VAT BE0561931985 · Reg. No. N5383 · Last updated: June 2026</p>
 
-        <hr class="divider">
+          <div class="timeline-section-title">1. Price guidelines</div>
+          <p>The prices below are indicative and exclude VAT. Each case is different — please feel free to get in touch for a no-obligation estimate.</p>
+          <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);"><span style="color:rgba(255,255,255,0.7);">Hourly rate — planned intervention</span><span style="font-weight:600;">€250 excl. VAT</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Hours actually worked; travel time not included.</p>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid rgba(255,255,255,0.08);"><span style="color:rgba(255,255,255,0.7);">Hourly rate — emergency / unplanned</span><span style="font-weight:600;">€350 excl. VAT</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:14px;">Subject to availability only.</p>
+            <div style="display:flex; justify-content:space-between; margin-bottom:10px;"><span style="color:rgba(255,255,255,0.7);">Travel allowance</span><span style="font-weight:600;">€0.8568 / km</span></div>
+            <p style="font-size:0.82rem; color:rgba(255,255,255,0.45); margin-bottom:0;">Return trip, calculated at 2× the official Belgian fiscal mileage rate; indexed annually.</p>
+          </div>
+          <p style="margin-top:16px;"><strong style="color:rgba(255,255,255,0.7);">Minimum hours for remote interventions</strong><br>Hours actually worked are charged. For interventions at greater distances, a contractual minimum applies only if the hours worked fall below the following thresholds:</p>
+          <div style="background:rgba(255,255,255,0.05); border-radius:14px; padding:18px 20px; margin:14px 0;">
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px 16px; font-size:0.85rem;">
+              <span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Distance (one way)</span><span style="color:rgba(255,255,255,0.45); font-weight:600; text-transform:uppercase; font-size:0.72rem; letter-spacing:1px;">Minimum</span>
+              <span style="color:rgba(255,255,255,0.75);">&lt; 20 km</span><span>No minimum</span>
+              <span style="color:rgba(255,255,255,0.75);">20–50 km</span><span>1 hour</span>
+              <span style="color:rgba(255,255,255,0.75);">50–100 km</span><span>2 hours</span>
+              <span style="color:rgba(255,255,255,0.75);">100–150 km</span><span>3 hours</span>
+              <span style="color:rgba(255,255,255,0.75);">&gt; 150 km</span><span>To be agreed individually</span>
+            </div>
+          </div>
+          <p><strong style="color:rgba(255,255,255,0.7);">Products and medications</strong><br>Products and medications are charged at indicative wholesale prices plus an administrative fee. A detailed price list is available on request.</p>
+          <p>All prices exclude VAT. The applicable VAT rate is 6% for veterinary services to food-producing animals and 21% in all other cases.</p>
+          <hr class="divider">
 
-        <div class="timeline-section-title">2. Beschikbaarheid en doorverwijzing</div>
-        <p><strong style="color:rgba(255,255,255,0.7);">2.1 Praktijkformule</strong><br>
-        DAP Artio is een gespecialiseerde mobiele praktijk voor exotische, wilde en bijzondere dieren, uitsluitend werkend op basis van geplande interventies. Aanvragen dienen bij voorkeur te worden ingediend per e-mail of WhatsApp-bericht, met vermelding van zo veel mogelijk informatie over het dier, de situatie en de urgentie. Omwille van de vaste tewerkstelling in de dierentuin is telefonische bereikbaarheid beperkt. Contact: artio.dap@gmail.com · +32 456 88 23 10.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">2.2 Onbeschikbaarheid en doorverwijzing</strong><br>
-        Wanneer DAP Artio niet beschikbaar is, wordt de opdrachtgever zo snel mogelijk doorverwezen naar een collega of de wachtdienst, conform art. 10 van de Code der Plichtenleer van de Orde der Dierenartsen (editie 2024).<br><br>
-        In geval van onbeschikbaarheid kan DAP Artio, in onderling overleg en met voorafgaand akkoord van Dr. Olivier Bertrand, specialistische gevallen doorverwijzen naar:<br>
-        <span style="color:rgba(255,255,255,0.6);">Dr. Olivier Bertrand · Bertrand &amp; Bartholomé Vétérinaires Associés · Rue Malispré 9, 5580 Han-sur-Lesse · www.docveto.be</span><br><br>
-        Voor spoedgevallen met gezelschapsdieren of gangbare landbouwdieren wordt doorverwezen naar de lokale wachtdienst dierenartsen.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">2.3 Aansprakelijkheidsbeperking bij niet-geplande interventies</strong><br>
-        DAP Artio kan niet aansprakelijk worden gesteld voor schade die voortvloeit uit de onmogelijkheid een niet-geplande of kortetermijninterventie uit te voeren, mits de opdrachtgever tijdig werd doorverwezen.</p>
+          <div class="timeline-section-title">2. Availability and referral</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.1</strong> DAP Artio is a specialised mobile practice working exclusively on the basis of planned interventions. Contact: artio.dap@gmail.com · +32 456 88 23 10.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.2</strong> When DAP Artio is unavailable, the client is referred to a colleague or the on-call service. Specialised cases may be referred to: <span style="color:rgba(255,255,255,0.6);">Dr. Olivier Bertrand · Bertrand &amp; Bartholomé Vétérinaires Associés · Rue Malispré 9, 5580 Han-sur-Lesse · www.docveto.be</span></p>
+          <p><strong style="color:rgba(255,255,255,0.7);">2.3</strong> DAP Artio cannot be held liable for damages resulting from the inability to carry out an unplanned intervention, provided the client was referred in a timely manner.</p>
+          <hr class="divider">
 
-        <hr class="divider">
+          <div class="timeline-section-title">3. Scope</div>
+          <p>These terms and conditions apply to all services and deliveries by DAP Artio. By accepting a quote or having an intervention carried out, the client acknowledges having read and agreed to these terms.</p>
+          <hr class="divider">
 
-        <div class="timeline-section-title">3. Toepassingsgebied</div>
-        <p>Deze algemene voorwaarden zijn van toepassing op alle diensten en leveringen verstrekt door dierenarts Niels Schouteden, handelend onder de naam DAP Artio. Door het aanvaarden van een offerte, het ondertekenen van een document of het laten uitvoeren van een interventie, erkent de opdrachtgever kennis te hebben genomen van en akkoord te gaan met deze voorwaarden. Deze voorwaarden zijn steeds raadpleegbaar via www.dapartio.be.</p>
+          <div class="timeline-section-title">4. Payment terms</div>
+          <p>Invoices are payable within 15 days of the invoice date. Late payment will incur statutory interest by operation of law. In the event of persistent non-payment, a flat-rate compensation of 10% (minimum €50) may be charged. Disputes are subject exclusively to the courts of the district of Hasselt.</p>
+          <hr class="divider">
 
-        <hr class="divider">
+          <div class="timeline-section-title">5. Liability</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.1</strong> The veterinarian undertakes to apply all reasonably expected expertise and resources (best-efforts obligation). No specific outcome of a treatment can be guaranteed.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.2</strong> DAP Artio is only liable for damage directly resulting from proven gross negligence or intent. Liability is limited to the amount of the invoice concerned.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">5.3</strong> The owner remains at all times liable for damage caused by the animal, including during and after a veterinary intervention.</p>
+          <hr class="divider">
 
-        <div class="timeline-section-title">4. Betalingsvoorwaarden</div>
-        <p>Facturen zijn betaalbaar binnen de 15 dagen na factuurdatum. Bij gebreke aan tijdige betaling zijn van rechtswege en zonder ingebrekestelling verwijlinteresten verschuldigd aan de wettelijke interestvoet. Bij aanhoudende wanbetaling behoudt DAP Artio zich het recht voor een forfaitaire schadevergoeding van 10% van het factuurbedrag aan te rekenen, met een minimum van EUR 50,00. Bij geschillen zijn uitsluitend de rechtbanken van het arrondissement Hasselt bevoegd.</p>
+          <div class="timeline-section-title">6. Tele-anaesthesia</div>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.1</strong> Tele-anaesthesia is carried out in accordance with applicable Belgian legislation.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.2</strong> The client signs a separate Declaration of Responsibility prior to each tele-anaesthesia, expressly accepting the professional liability of the veterinarian for damage directly resulting from the procedure.</p>
+          <p><strong style="color:rgba(255,255,255,0.7);">6.3</strong> The client undertakes to take all necessary safety measures and to ensure proper aftercare of the anaesthetised animal.</p>
+          <hr class="divider">
 
-        <hr class="divider">
+          <div class="timeline-section-title">7. Use of medicines — food chain</div>
+          <p>The use of veterinary medicines complies with Regulation (EU) 2019/6 and the Royal Decree of 21 July 2016. A prescription document is issued for any treatment of food-producing animals. The owner must strictly observe the withdrawal periods stated. Animals treated with a medicine for which no withdrawal period has been established must be permanently excluded from the human food chain.</p>
+          <hr class="divider">
 
-        <div class="timeline-section-title">5. Aansprakelijkheid</div>
-        <p><strong style="color:rgba(255,255,255,0.7);">5.1 Inspanningsverbintenis</strong><br>
-        De dierenarts verbindt zich ertoe alle redelijkerwijs te verwachten vakkennis en middelen in te zetten (inspanningsverbintenis conform art. 1137 Burgerlijk Wetboek). Er bestaat geen resultaatsverbintenis: de dierenarts kan geen specifieke uitkomst van een behandeling of interventie garanderen.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">5.2 Beperking van aansprakelijkheid</strong><br>
-        DAP Artio is slechts aansprakelijk voor schade die rechtstreeks voortvloeit uit bewezen zware fout of opzet. Aansprakelijkheid voor gevolgschade, gederfde winst, of schade aan derden buiten de directe interventieomgeving is uitgesloten. De aansprakelijkheid is in elk geval beperkt tot het bedrag van de betrokken factuur.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">5.3 Risico-aansprakelijkheid dieren</strong><br>
-        De eigenaar of verantwoordelijke van het dier blijft te allen tijde risicoaansprakelijk voor schade veroorzaakt door het dier, ook tijdens en na een veterinaire interventie (art. 1385 Burgerlijk Wetboek).</p>
+          <div class="timeline-section-title">8. Force majeure and emergencies</div>
+          <p>DAP Artio is not liable for failure to carry out an intervention due to force majeure. Given the practice structure, DAP Artio cannot always respond immediately to emergencies; clients are referred in accordance with article 2.2.</p>
+          <hr class="divider">
 
-        <hr class="divider">
-
-        <div class="timeline-section-title">6. Tele-anesthesie (afstandsverdoving)</div>
-        <p><strong style="color:rgba(255,255,255,0.7);">6.1 Wettelijk kader</strong><br>
-        Tele-anesthesie wordt uitgevoerd conform art. 2 §3 van de Wet van 28 augustus 1991 op de uitoefening van de diergeneeskunde en het Koninklijk Besluit van 21 juli 2016 betreffende het gebruik van diergeneesmiddelen.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">6.2 Overdracht van aansprakelijkheid</strong><br>
-        Gezien de inherente en niet volledig beheersbare risico's verbonden aan afstandsverdoving ondertekent de opdrachtgever voorafgaand aan elke tele-anesthesie een afzonderlijke Verklaring van Verantwoordelijkheid. Door ondertekening aanvaardt de opdrachtgever uitdrukkelijk de professionele aansprakelijkheid van de dierenarts voor schade die rechtstreeks voortvloeit uit de uitvoering van de tele-anesthesie, conform art. 1134 Burgerlijk Wetboek.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">6.3 Verplichtingen opdrachtgever</strong><br>
-        De opdrachtgever verbindt zich ertoe alle redelijk uitvoerbare veiligheidsmaatregelen te treffen, de instructies van DAP Artio strikt op te volgen, het interventiegebied veilig af te sluiten en in te staan voor de correcte nazorg en monitoring van het verdoofde dier na de interventie.</p>
-
-        <hr class="divider">
-
-        <div class="timeline-section-title">7. Gebruik van geneesmiddelen — voedselketen</div>
-        <p><strong style="color:rgba(255,255,255,0.7);">7.1 Wettelijk kader</strong><br>
-        Het gebruik van diergeneesmiddelen door DAP Artio gebeurt conform Verordening (EU) 2019/6 en het Koninklijk Besluit van 21 juli 2016. Voor elke toediening aan voedselproducerende dieren wordt een Toedienings- en Verschaffingsdocument (TVD) opgesteld conform het Ministerieel Besluit van 27 augustus 2024.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">7.2 Wachttijden</strong><br>
-        De eigenaar of verantwoordelijke van voedselproducerende dieren is verplicht de wachttijden vermeld op het TVD strikt na te leven. DAP Artio is niet aansprakelijk voor schade die voortvloeit uit het niet-naleven van de opgegeven wachttijden.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">7.3 Noodgebruik en cascadeproducten</strong><br>
-        In nood- of welzijnssituaties kan het medisch noodzakelijk zijn geneesmiddelen toe te dienen waarvoor geen gevestigde wachttijd bestaat. Dit gebruik is wettelijk gedekt via het cascadesysteem (art. 113 Verordening (EU) 2019/6) en wordt uitsluitend toegepast onder de uitdrukkelijke verantwoordelijkheid van de dierenarts.</p>
-        <p><strong style="color:rgba(255,255,255,0.7);">7.4 Uitsluiting uit de voedselketen</strong><br>
-        Wanneer een dier een geneesmiddel toegediend heeft gekregen waarvoor geen wachttijd kon worden vastgesteld, wordt dit uitdrukkelijk vermeld op de factuur en/of het TVD. Het betrokken dier dient definitief te worden uitgesloten uit de menselijke voedselketen.</p>
-
-        <hr class="divider">
-
-        <div class="timeline-section-title">8. Overmacht en spoedgevallen</div>
-        <p>DAP Artio is niet aansprakelijk voor het niet of niet-tijdig uitvoeren van een interventie als gevolg van overmacht, waaronder extreme weersomstandigheden, verkeersongevallen, ziekte van de dierenarts of overheidsmaatregelen.</p>
-        <p>Gezien de structuur van de praktijk kan DAP Artio niet steeds onmiddellijk reageren op spoedgevallen. Opdrachtgevers worden in dat geval verwezen naar de doorverwijzingsopties vermeld in artikel 2.2. DAP Artio kan hiervoor niet aansprakelijk worden gesteld, mits doorverwijzing heeft plaatsgevonden.</p>
-
-        <hr class="divider">
-
-        <div class="timeline-section-title">9. Privacy</div>
-        <p>DAP Artio verwerkt persoonsgegevens van opdrachtgevers uitsluitend in het kader van de dienstverleningsovereenkomst en de wettelijke bewaarplichten (o.a. medicatieregister minimum 5 jaar conform KB 21/07/2016). Gegevens worden niet doorgegeven aan derden buiten de wettelijke verplichtingen. Meer informatie op verzoek.</p>
-
-        <hr class="divider">
-
-        <p style="color:rgba(255,255,255,0.38); font-size:0.8rem; line-height:1.7;">
-          Wettelijke referenties: Wet 28 augustus 1991 · KB 21 juli 2016 · Verordening (EU) 2019/6 · MB 27 augustus 2024 · Burgerlijk Wetboek art. 1134, 1137, 1382–1386bis · Code der Plichtenleer Orde der Dierenartsen editie 2024 · Wetboek Economisch Recht.
-        </p>
-
+          <div class="timeline-section-title">9. Privacy</div>
+          <p>Personal data is processed solely in the context of the service agreement and legal retention obligations. Data is not shared with third parties outside of legal obligations.</p>
+          <hr class="divider">
+          <p style="color:rgba(255,255,255,0.38); font-size:0.8rem; line-height:1.7;">Legal references: Law of 28 August 1991 · Royal Decree 21 July 2016 · Regulation (EU) 2019/6 · Ministerial Decree 27 August 2024 · Civil Code art. 1134, 1137, 1382–1386bis · Code of Conduct of the Order of Veterinarians ed. 2024 · Belgian Code of Economic Law.</p>
+        </div>
       </div>
 
       <div class="footer">© 2026 Artio · Niels Schouteden · Alle rechten voorbehouden</div>
@@ -682,15 +701,62 @@
   </div><!-- /container -->
 
   <script>
+    // ── TRANSLATIONS for nav labels ──
+    const navLabels = {
+      nl: ['Home','Het team','Faciliteiten','Studies & ervaring',"Foto's",'Contact','Algemene voorwaarden'],
+      fr: ['Accueil','L\'équipe','Installations','Études & expérience','Photos','Contact','Conditions générales'],
+      en: ['Home','The team','Facilities','Education & experience','Photos','Contact','Terms & conditions']
+    };
+    const pageIds = ['home','team','faciliteiten','studies','fotos','contact','voorwaarden'];
+
+    let currentLang = 'nl';
+    let currentPage = 'home';
+
+    function buildNav() {
+      const nav = document.getElementById('main-nav');
+      nav.innerHTML = '';
+      pageIds.forEach((id, i) => {
+        const btn = document.createElement('button');
+        btn.textContent = navLabels[currentLang][i];
+        btn.onclick = () => showPage(id);
+        if (id === currentPage) btn.classList.add('active');
+        nav.appendChild(btn);
+      });
+    }
+
     function showPage(id) {
       document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
       document.getElementById(id).classList.add('active');
-      const navBtns = document.querySelectorAll('nav button');
-      const order = ['home','team','faciliteiten','studies','fotos','contact','voorwaarden'];
-      navBtns[order.indexOf(id)].classList.add('active');
+      currentPage = id;
+      buildNav();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    function setLang(lang) {
+      currentLang = lang;
+
+      // Update lang buttons
+      const langOrder = ['nl','fr','en'];
+      document.querySelectorAll('.lang-btn').forEach((b, i) => {
+        b.classList.toggle('active', langOrder[i] === lang);
+      });
+
+      // Show/hide lang content blocks
+      document.querySelectorAll('.lang-content').forEach(el => {
+        el.classList.remove('active');
+        // for inline spans that use display:none/inline instead of block
+        if (el.tagName === 'SPAN') el.style.display = 'none';
+      });
+      document.querySelectorAll('.lang-content.' + lang).forEach(el => {
+        el.classList.add('active');
+        if (el.tagName === 'SPAN') el.style.display = 'inline';
+      });
+
+      buildNav();
+    }
+
+    // Init
+    buildNav();
   </script>
 
 </body>
